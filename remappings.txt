@@ -1,0 +1,2 @@
+forge-std/=packages/contracts/lib/forge-std/src/
+solenv/=packages/contracts/lib/solenv/src

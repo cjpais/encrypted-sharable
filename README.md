@@ -6,6 +6,8 @@ can have public, private, and shared files.
 
 v1: enable basic encrypted file sharing
 
+v1.1?: be able to remove permissions
+
 v2: might be useful to be able to share with groups of people
 
 v3: add directory support

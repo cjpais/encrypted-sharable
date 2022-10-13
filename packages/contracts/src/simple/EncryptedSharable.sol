@@ -21,24 +21,22 @@ contract EncryptedSharable {
     }
 
     // Events
-    event DataCreated(
+    event DataCreated(uint256 id, address creator, bytes data, bytes userData);
+    event KeyAdded(
         uint256 id,
-        address creator,
-        bytes data,
-        bytes userData,
-        EncryptionKey[] keys
+        address person,
+        bytes24 nonce,
+        bytes32 ephemeralPublicKey,
+        bytes encryptedKey
     );
 
-    event KeyAdded(uint256 id, EncryptionKey key);
-
     // Errors
-
     error DataNotFound();
     error Unauthorized();
 
     // Storage
     mapping(uint256 => Data) public data;
-    mapping(address => uint256) public userAccess;
+    mapping(address => uint256[]) public userAccess;
 
     uint256 public dataCount;
 
@@ -55,13 +53,28 @@ contract EncryptedSharable {
 
         d.creator = msg.sender;
         d.data = _data;
-        d.keys = keys;
+        // d.keys = keys;
         // d.numKeys = keys.length;
         d.userData = userData;
 
         for (uint256 i = 0; i < keys.length; i++) {
-            userAccess[keys[i].person] = id;
+            EncryptionKey memory key = keys[i];
+
+            d.keys.push(key);
+            emit KeyAdded(
+                id,
+                key.person,
+                key.nonce,
+                key.ephemeralPublicKey,
+                key.encryptedKey
+            );
         }
+
+        for (uint256 i = 0; i < keys.length; i++) {
+            userAccess[keys[i].person].push(id);
+        }
+
+        emit DataCreated(id, d.creator, d.data, userData);
 
         dataCount++;
         return id;
@@ -74,21 +87,15 @@ contract EncryptedSharable {
         if (data[id].creator != msg.sender) revert Unauthorized();
 
         data[id].keys.push(key);
-        userAccess[key.person] = id;
-    }
+        userAccess[key.person].push(id);
 
-    function getKeySelf(uint256 id) public view returns (EncryptionKey memory) {
-        return getKey(id, msg.sender);
-    }
-
-    function getKey(uint256 id, address addr)
-        public
-        view
-        returns (EncryptionKey memory)
-    {
-        // data should exist
-        if (id >= dataCount) revert DataNotFound();
-        return data[id].keys[userAccess[addr]];
+        emit KeyAdded(
+            id,
+            key.person,
+            key.nonce,
+            key.ephemeralPublicKey,
+            key.encryptedKey
+        );
     }
 
     function getData(uint256 id) public view returns (Data memory) {
@@ -96,4 +103,8 @@ contract EncryptedSharable {
         if (id >= dataCount) revert DataNotFound();
         return data[id];
     }
+
+    // TODO should have a getKey function for a data id. This probably mean
+    // data structure changes.
+    // Right now we are assuming this is indexed. Not accessible on-chain.
 }

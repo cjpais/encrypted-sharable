@@ -1,0 +1,26 @@
+type Person @entity {
+  id: ID!
+  address: String!
+  publicKey: String!
+  createdData: [Data!]! @derivedFrom(field: "creator")
+  keys: [Key!]! @derivedFrom(field: "address")
+}
+
+type Data @entity {
+  id: ID!
+  creator: Person!
+  data: String!
+  userData: String!
+  created: Int!
+  keys: [Key!]! @derivedFrom(field: "data")
+}
+
+type Key @entity {
+  id: ID!
+  address: Person!
+  nonce: String!
+  ephemeralPublicKey: String!
+  encryptedKey: String!
+  data: Data!
+}
+

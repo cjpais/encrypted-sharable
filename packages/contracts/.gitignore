@@ -14,5 +14,6 @@ out/console.sol/**/*.abi.json
 out/console2.sol/**/*.abi.json
 # Why do these globs make this so hard?
 
+!.env.example
 .env.*
 .env

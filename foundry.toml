@@ -4,9 +4,11 @@
 #
 # See https://github.com/holic/web3-scaffold/pull/23
 
-[default]
+[profile.default]
 src = 'packages/contracts/src'
 test = 'packages/contracts/test'
+script = 'packages/contracts/script'
+broadcast = 'packages/contracts/broadcast'
 allow_paths = ['packages/contracts/scripts']
 out = 'packages/contracts/out'
 cache_path = 'packages/contracts/cache'

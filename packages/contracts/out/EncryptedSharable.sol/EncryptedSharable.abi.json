@@ -1,0 +1,300 @@
+[
+  {
+    "inputs": [],
+    "name": "DataNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Unauthorized",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "userData",
+        "type": "bytes"
+      }
+    ],
+    "name": "DataCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "person",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes24",
+        "name": "nonce",
+        "type": "bytes24"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "ephemeralPublicKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "encryptedKey",
+        "type": "bytes"
+      }
+    ],
+    "name": "KeyAdded",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "person",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes24",
+            "name": "nonce",
+            "type": "bytes24"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "ephemeralPublicKey",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes",
+            "name": "encryptedKey",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct EncryptedSharable.EncryptionKey",
+        "name": "key",
+        "type": "tuple"
+      }
+    ],
+    "name": "addKey",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_data",
+        "type": "bytes"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "person",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes24",
+            "name": "nonce",
+            "type": "bytes24"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "ephemeralPublicKey",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes",
+            "name": "encryptedKey",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct EncryptedSharable.EncryptionKey[]",
+        "name": "keys",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "userData",
+        "type": "bytes"
+      }
+    ],
+    "name": "create",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "data",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "userData",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "dataCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getData",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "person",
+                "type": "address"
+              },
+              {
+                "internalType": "bytes24",
+                "name": "nonce",
+                "type": "bytes24"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "ephemeralPublicKey",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes",
+                "name": "encryptedKey",
+                "type": "bytes"
+              }
+            ],
+            "internalType": "struct EncryptedSharable.EncryptionKey[]",
+            "name": "keys",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "bytes",
+            "name": "userData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct EncryptedSharable.Data",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userAccess",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

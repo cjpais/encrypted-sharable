@@ -1,0 +1,21 @@
+{
+  "name": "@encrypted-sharable/app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ponder dev",
+    "start": "ponder start"
+  },
+  "dependencies": {
+    "@ponder/ponder": "latest"
+  },
+  "devDependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/providers": "^5.7.1",
+    "ethers": "^5.7.1"
+  },
+  "engines": {
+    "node": "16",
+    "pnpm": "7"
+  }
+}

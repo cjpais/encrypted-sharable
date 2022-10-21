@@ -4,7 +4,7 @@ module.exports = {
   networks: [
     {
       name: "goerli",
-      rpcUrl: ponder.env.PONDER_RPC_URL_5,
+      rpcUrl: process.env.PONDER_RPC_URL_5,
       chainId: 5
     }
   ],

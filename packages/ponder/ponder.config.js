@@ -1,6 +1,13 @@
 module.exports = {
   database: { kind: "sqlite" },
   graphql: { port: 42069 },
+  networks: [
+    {
+      name: "goerli",
+      rpcUrl: ponder.env.PONDER_RPC_URL_5,
+      chainId: 5
+    }
+  ],
   sources: [
     {
       kind: "evm",

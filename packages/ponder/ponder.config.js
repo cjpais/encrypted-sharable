@@ -12,6 +12,7 @@ module.exports = {
     {
       kind: "evm",
       name: "EncryptedSharable",
+      network: "goerli",
       chainId: 5,
       rpcUrl: process.env.PONDER_RPC_URL_5,
       address: "0x155D3e39aFE591C750fD5a70f50494208D101C0d",
@@ -21,6 +22,7 @@ module.exports = {
     {
       kind: "evm",
       name: "PublicKeyRegistry",
+      network: "goerli",
       chainId: 5,
       rpcUrl: process.env.PONDER_RPC_URL_5,
       address: "0x33ACbCF1baC10F3a4aE61Ae312Da212fC9D6286F",

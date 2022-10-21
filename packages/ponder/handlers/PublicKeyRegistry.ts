@@ -7,8 +7,8 @@ const handlePublicKeyRegistered: PublicKeyRegisteredHandler = async (
   const { Person } = context.entities;
 
   await Person.insert({
-    id: event.params.account.toString(),
-    address: event.params.account.toString(),
+    id: event.params.account.toString().toLowerCase(),
+    address: event.params.account.toString().toLowerCase(),
     publicKey: event.params.publicKey,
   });
 };

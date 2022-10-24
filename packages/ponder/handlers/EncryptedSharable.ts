@@ -18,6 +18,10 @@ const handleDataCreated: DataCreatedHandler = async (event, context) => {
 const handleKeyAdded: KeyAddedHandler = async (event, context) => {
   const { Key } = context.entities;
 
+  console.log(
+    `adding key ${event.params.id.toString()} for ${event.params.person.toString()}`
+  );
+
   await Key.insert({
     id: `${event.params.id.toString()}-${event.params.person
       .toString()

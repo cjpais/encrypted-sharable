@@ -17,3 +17,20 @@ v3: handle read/write permissions
 v4: handle file versioning
 
 v5: migrate to graph schema
+
+## Current Status
+
+* Add public key to registry
+* Then can encrypt any data to any public key in the registry
+* The reciever(s) of the data can open the data and decrypt it
+
+## TODO
+
+* Move to EIP-5630
+    * Use Metamask Snap similar to: https://github.com/skgbafa/dessi/
+    * Move to ECIES instead of custom rolled type of ECIES
+        * Impacts but simplifies both the contracts and the frontend code
+* Add basic permissioning system in
+* Add group sharing in
+* First class support for encrypted URL data (IPFS especially + cheap storage)
+    * It's possible to imagine a drag and drop thing where we use SSTORE2 on a whole bundle of IPFS hash's

@@ -1,9 +1,12 @@
+import { useMetaMask } from "metamask-react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+import { gql } from "urql";
+import { useMyMessagesQuery } from "../codegen/subgraph";
 import AddPublicKey from "../components/AddPublicKey";
 import ConnectMetamask from "../components/ConnectMetamask";
 import EncryptData from "../components/EncryptData";
+import MessageList from "../components/MessageList";
 import TestDecrypt from "../components/TestDecrypt";
 import styles from "../styles/Home.module.css";
 
@@ -33,7 +36,9 @@ const Home: NextPage = () => {
 
           <EncryptData />
 
-          <TestDecrypt />
+          <MessageList />
+
+          {/* <TestDecrypt /> */}
         </div>
       </main>
     </div>

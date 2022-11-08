@@ -9,8 +9,9 @@ import { EncryptedSharable__factory } from "../../contracts/types";
 import { encrypt } from "@metamask/eth-sig-util";
 import Deploys from "../../contracts/deploys/goerli.json";
 import CryptoJS from "crypto-js";
+import { encryptPassword } from "../features/encrypt";
 
-const b64tohex = (str: string) => {
+export const b64tohex = (str: string) => {
   return Buffer.from(str, "base64").toString("hex");
 };
 
@@ -28,7 +29,6 @@ const EncryptData = () => {
 
     // get public key from contract
     const pubKeyHex = await pubKeyRegistryContract.getPublicKey(account);
-    const pubKeyB64 = Buffer.from(pubKeyHex.slice(2), "hex").toString("base64");
 
     // generate a password to encrypt data with (32bits)
     const password = crypto.getRandomValues(new Uint8Array(32));
@@ -40,18 +40,14 @@ const EncryptData = () => {
 
     // TODO doing this in pure js definitely leaks information
     // encrypt the password with the public key
-    const encryptedPassword = encrypt({
-      publicKey: pubKeyB64,
-      data: password.toString(),
-      version: "x25519-xsalsa20-poly1305",
-    });
+    const encryptedPassword = encryptPassword(passwordHex, pubKeyHex);
 
     const encryptedSharableContract = EncryptedSharable__factory.connect(
       Deploys.EncryptedSharable,
       signer
     );
 
-    console.log("password", encryptedPassword);
+    console.log("encryptedpassword", { encryptedPassword });
 
     const tx = await encryptedSharableContract.create(
       "0x" + encryptedMessageHex,

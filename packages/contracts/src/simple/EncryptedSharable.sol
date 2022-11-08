@@ -80,6 +80,7 @@ contract EncryptedSharable {
         return id;
     }
 
+    // TODO only someone with permissions should be able to do this.
     function addKey(uint256 id, EncryptionKey memory key) public {
         // data should exist
         if (id >= dataCount) revert DataNotFound();

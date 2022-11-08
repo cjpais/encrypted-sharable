@@ -5,6 +5,7 @@ import { useMetaMask } from "metamask-react";
 import { ethers } from "ethers";
 import { EthEncryptedData } from "@metamask/eth-sig-util";
 import CryptoJS, { enc } from "crypto-js";
+import { useDecrypted } from "../features/useDecrypted";
 
 const TestDecrypt = () => {
   const { status, account, ethereum } = useMetaMask();
@@ -12,6 +13,8 @@ const TestDecrypt = () => {
   const [decryptedPassword, setDecryptedPassword] = useState<string>();
   const [encryptedMessage, setEncryptedMessage] = useState<string>();
   const [messageId, setMessageId] = useState<number>(0);
+
+  const state = useDecrypted();
 
   // fetch the info from the chain
   useEffect(() => {
@@ -22,6 +25,9 @@ const TestDecrypt = () => {
         Deploys.EncryptedSharable,
         new ethers.providers.Web3Provider(ethereum)
       );
+      console.log("messageid", messageId, state.decryptedData);
+
+      if (state.decryptedData.find((el) => el.id === messageId)) return;
       contract.getData(messageId).then((d) => {
         console.log("d", d);
         setEncryptedMessage(d[1]);
@@ -57,8 +63,10 @@ const TestDecrypt = () => {
               hextob64(encryptedMessage),
               pass
             );
-            console.log(decryptedMessage.toString(CryptoJS.enc.Utf8));
-            setDecryptedMessage(decryptedMessage.toString(CryptoJS.enc.Utf8));
+            const utfDecryptedMessage = decryptedMessage.toString(enc.Utf8);
+            console.log(utfDecryptedMessage);
+            setDecryptedMessage(utfDecryptedMessage);
+            state.addDecryptedData(messageId, utfDecryptedMessage);
           });
       });
     }

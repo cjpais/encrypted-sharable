@@ -7,6 +7,7 @@
     "start": "ponder start"
   },
   "dependencies": {
+    "@ponder/graphql": "^0.0.5",
     "@ponder/ponder": "latest"
   },
   "devDependencies": {

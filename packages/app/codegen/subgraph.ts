@@ -121,6 +121,7 @@ export type Person = {
   readonly __typename?: 'Person';
   readonly address: Scalars['String'];
   readonly createdData: ReadonlyArray<Data>;
+  readonly displayAddress: Scalars['String'];
   readonly id: Scalars['ID'];
   readonly keys: ReadonlyArray<Key>;
   readonly publicKey: Scalars['String'];
@@ -139,6 +140,18 @@ export type PersonFilter = {
   readonly address_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
   readonly address_starts_with?: InputMaybe<Scalars['String']>;
   readonly address_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  readonly displayAddress?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_ends_with?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
+  readonly displayAddress_not?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_not_ends_with?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
+  readonly displayAddress_not_starts_with?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_starts_with?: InputMaybe<Scalars['String']>;
+  readonly displayAddress_starts_with_nocase?: InputMaybe<Scalars['String']>;
   readonly id?: InputMaybe<Scalars['ID']>;
   readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   readonly id_not?: InputMaybe<Scalars['ID']>;
@@ -212,7 +225,7 @@ export type QueryPersonsArgs = {
 export type PublicKeysQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PublicKeysQuery = { readonly __typename?: 'Query', readonly persons: ReadonlyArray<{ readonly __typename?: 'Person', readonly id: string, readonly address: string, readonly publicKey: string }> };
+export type PublicKeysQuery = { readonly __typename?: 'Query', readonly persons: ReadonlyArray<{ readonly __typename?: 'Person', readonly id: string, readonly address: string, readonly displayAddress: string, readonly publicKey: string }> };
 
 export type MyMessagesQueryVariables = Exact<{
   addr: Scalars['String'];
@@ -227,6 +240,7 @@ export const PublicKeysDocument = gql`
   persons {
     id
     address
+    displayAddress
     publicKey
   }
 }

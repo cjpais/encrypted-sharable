@@ -9,7 +9,7 @@ import { EncryptedSharable__factory } from "../../contracts/types";
 import Deploys from "../../contracts/deploys/goerli.json";
 
 const AddPublicKey = () => {
-  const { status, account, ethereum } = useMetaMask();
+  const { switchChain, account, ethereum } = useMetaMask();
 
   const add = async () => {
     // use the account now to generate the public key
@@ -27,6 +27,7 @@ const AddPublicKey = () => {
       Buffer.from(pubKey, "base64").toString("hex")
     );
 
+    switchChain("5");
     const addr = Deploys.PublicKeyRegistry;
     // send the public key to the chain
     const signer = new ethers.providers.Web3Provider(ethereum).getSigner();
@@ -42,7 +43,11 @@ const AddPublicKey = () => {
     console.log("success");
   };
 
-  return <button onClick={add}>Add Public Key</button>;
+  return (
+    <button className="p-2 border-2 rounded-xl" onClick={add}>
+      Add Public Key
+    </button>
+  );
 };
 
 export default AddPublicKey;

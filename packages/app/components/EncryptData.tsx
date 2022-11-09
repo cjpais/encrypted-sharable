@@ -2,11 +2,9 @@
 
 import { ethers } from "ethers";
 import { useMetaMask } from "metamask-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PubKeyRegistryABI from "../../contracts/out/PublicKeyRegistry.sol/PublicKeyRegistry.abi.json";
-import EncryptedSharableABI from "../../contracts/out/EncryptedSharable.sol/EncryptedSharable.abi.json";
 import { EncryptedSharable__factory } from "../../contracts/types";
-import { encrypt } from "@metamask/eth-sig-util";
 import Deploys from "../../contracts/deploys/goerli.json";
 import CryptoJS from "crypto-js";
 import { encryptPassword } from "../features/encrypt";
@@ -16,7 +14,7 @@ export const b64tohex = (str: string) => {
 };
 
 const EncryptData = () => {
-  const { status, account, ethereum } = useMetaMask();
+  const { switchChain, account, ethereum } = useMetaMask();
   const [message, setMessage] = useState<string>();
 
   const sendEncrypted = async () => {
@@ -49,6 +47,7 @@ const EncryptData = () => {
 
     console.log("encryptedpassword", { encryptedPassword });
 
+    await switchChain("5");
     const tx = await encryptedSharableContract.create(
       "0x" + encryptedMessageHex,
       [
@@ -86,12 +85,16 @@ const EncryptData = () => {
   };
 
   return (
-    <div style={{ display: "flex", gap: ".5rem" }}>
+    <div className="flex items-center gap-4">
       <textarea
+        className="border-2 w-96 p-2 rounded-xl"
+        placeholder="Type message here"
         onChange={(e) => setMessage(e.target.value)}
         disabled={message === ""}
       ></textarea>
-      <button onClick={sendEncrypted}>Send Encrypted Message</button>
+      <button className="p-2 border-2 rounded-xl" onClick={sendEncrypted}>
+        Send Encrypted Message
+      </button>
     </div>
   );
 };

@@ -22,6 +22,7 @@ gql`
     persons {
       id
       address
+      displayAddress
       publicKey
     }
   }
@@ -134,7 +135,7 @@ const MessageList = () => {
       const options = publicKeysQuery.data.persons.map((p) => {
         const opts: SelectOptions = {
           value: p.address,
-          label: p.address,
+          label: p.displayAddress,
           address: p.address,
           publicKey: p.publicKey,
         };

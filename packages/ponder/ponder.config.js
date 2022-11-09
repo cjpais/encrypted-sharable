@@ -1,7 +1,11 @@
 const { graphqlPlugin } = require("@ponder/graphql");
 
 module.exports = {
-  database: { kind: "sqlite" },
+  database: { 
+    // kind: "sqlite" 
+    kind: "postgres",
+    connectionString: process.env.POSTGRES_URL,
+  },
   graphql: { port: 42069 },
   plugins: [graphqlPlugin()],
   networks: [

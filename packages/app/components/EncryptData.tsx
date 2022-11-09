@@ -47,7 +47,7 @@ const EncryptData = () => {
 
     console.log("encryptedpassword", { encryptedPassword });
 
-    await switchChain("5");
+    await switchChain("0x5");
     const tx = await encryptedSharableContract.create(
       "0x" + encryptedMessageHex,
       [

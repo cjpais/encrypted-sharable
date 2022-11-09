@@ -23,7 +23,7 @@ const ConnectMetamask = () => {
     } else {
       setMessage(statusMessage[status]);
     }
-  }, [status, account]);
+  }, [status, account, accName]);
 
   return (
     <button className="my-4 p-2 border-2 rounded-xl" onClick={connect}>

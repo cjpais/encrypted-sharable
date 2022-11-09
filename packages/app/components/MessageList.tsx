@@ -165,11 +165,13 @@ const MessageList = () => {
           >
             <div className="flex gap-5 text-xs">
               <p>{d.creator}</p>
-              {/* <TimeAgo datetime={d.timestamp * 1000} />
+              <TimeAgo datetime={d.timestamp * 1000} />
               <Select
+                className="my-react-select-container"
+                classNamePrefix="my-react-select"
                 options={publicKeysOption}
                 onChange={(e) => addPerson(e as SelectOptions, d.id)}
-              /> */}
+              />
             </div>
             <p className="text-sm">{d.data}</p>
           </div>

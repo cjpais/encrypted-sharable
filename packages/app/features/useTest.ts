@@ -22,7 +22,7 @@ const emptyState = (set: any): RandomState => ({
 
 const usePersistedStore = create(persist(emptyState, { name: "user-storage" }));
 
-export const useStore = (selector, compare) => {
+export const useStore = (selector: any, compare: any) => {
   /*
   This a fix to ensure zustand never hydrates the store before React hydrates the page.
   Without this, there is a mismatch between SSR/SSG and client side on first draw which produces

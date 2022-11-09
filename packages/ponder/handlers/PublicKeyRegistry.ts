@@ -6,9 +6,16 @@ const handlePublicKeyRegistered: PublicKeyRegisteredHandler = async (
 ) => {
   const { Person } = context.entities;
 
+  const address = event.params.account.toString().toLowerCase();
+
+  const ensInfo = await (
+    await fetch(`https://api.ensideas.com/ens/resolve/${address}`)
+  ).json();
+
   await Person.insert({
-    id: event.params.account.toString().toLowerCase(),
-    address: event.params.account.toString().toLowerCase(),
+    id: address,
+    address: address,
+    displayAddress: ensInfo.displayName,
     publicKey: event.params.publicKey,
   });
 };

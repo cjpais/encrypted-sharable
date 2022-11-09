@@ -1,6 +1,7 @@
 type Person @entity {
   id: ID!
   address: String!
+  displayAddress: String!
   publicKey: String!
   createdData: [Data!]! @derivedFrom(field: "creator")
   keys: [Key!]! @derivedFrom(field: "address")

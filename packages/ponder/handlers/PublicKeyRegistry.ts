@@ -1,4 +1,5 @@
 import { PublicKeyRegisteredHandler } from "../generated/PublicKeyRegistry";
+import fetch from "node-fetch";
 
 const handlePublicKeyRegistered: PublicKeyRegisteredHandler = async (
   event,

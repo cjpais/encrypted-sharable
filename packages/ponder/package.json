@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@ponder/graphql": "^0.0.5",
-    "@ponder/ponder": "latest"
+    "@ponder/ponder": "latest",
+    "node-fetch": "^3.2.10"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",

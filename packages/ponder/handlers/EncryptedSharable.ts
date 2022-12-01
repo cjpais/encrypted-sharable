@@ -1,16 +1,12 @@
-import {
-  DataCreatedHandler,
-  KeyAddedHandler,
-} from "../generated/EncryptedSharable";
+import { DataCreatedHandler, KeyAddedHandler } from "../generated/handlers";
 
 const handleDataCreated: DataCreatedHandler = async (event, context) => {
   const { Data } = context.entities;
 
-  await Data.insert({
-    id: event.params.id.toString(),
+  await Data.insert(event.params.id.toString(), {
     creator: event.params.creator.toString().toLowerCase(),
-    data: event.params.data,
-    userData: event.params.userData,
+    data: event.params.data.toString(),
+    userData: event.params.userData.toString(),
     created: event.block.timestamp,
   });
 };
@@ -18,20 +14,18 @@ const handleDataCreated: DataCreatedHandler = async (event, context) => {
 const handleKeyAdded: KeyAddedHandler = async (event, context) => {
   const { Key } = context.entities;
 
-  console.log(
-    `adding key ${event.params.id.toString()} for ${event.params.person.toString()}`
-  );
-
-  await Key.insert({
-    id: `${event.params.id.toString()}-${event.params.person
+  await Key.insert(
+    `${event.params.id.toString()}-${event.params.person
       .toString()
       .toLowerCase()}`,
-    address: event.params.person.toString().toLowerCase(),
-    nonce: event.params.nonce,
-    ephemeralPublicKey: event.params.ephemeralPublicKey,
-    encryptedKey: event.params.encryptedKey,
-    data: event.params.id.toString(),
-  });
+    {
+      address: event.params.person.toString().toLowerCase(),
+      nonce: event.params.nonce.toString(),
+      ephemeralPublicKey: event.params.ephemeralPublicKey.toString(),
+      encryptedKey: event.params.encryptedKey.toString(),
+      data: event.params.id.toString(),
+    }
+  );
 };
 
 export const EncryptedSharable = {

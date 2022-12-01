@@ -6,7 +6,6 @@ module.exports = {
     // kind: "postgres",
     // connectionString: process.env.POSTGRES_URL,
   },
-  graphql: { port: 42069 },
   plugins: [graphqlPlugin()],
   networks: [
     {
